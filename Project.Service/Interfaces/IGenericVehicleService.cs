@@ -1,14 +1,13 @@
 using System.Threading.Tasks;
-using System.Collections.Generic;
+using System.Linq;
+using Project.Service.Collections;
 
 namespace Project.Service.Interfaces
 {
     public interface IGenericVehicleService<TEntity> where TEntity : class
     {
         Task Create(TEntity entity);
-        Task<IList<TEntity>> ReadRange(int skipRows, int numberOfItems);
-        Task<TEntity> ReadById(int id);
         Task Update(TEntity entity);
-        Task Delete(int id);
+        Task<PaginatedList<TEntity>> CreatePageAsync(IQueryable<TEntity> source, int pageIndex, int pageSize);
     }
 }
