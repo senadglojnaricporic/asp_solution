@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FKrnMTuRycK1c3duzxT5rCJHSloxB17HnplPHR9WDkAr3ObkeNA6KLyEJR6yaIyKxvzjNL7hoWw3pZelVEKChg==",
+  "dgSpecHash": "bsJaifAP7rD5y077SafWlL6PPXHMdzqBDMLs0F8lqlSLf5fG1z+a4QhPTyhBeUKSJYLDgQv2uhtRgE/A0X2LSw==",
   "success": true,
-  "projectFilePath": "F:\\asp_solution\\Project.Service\\Project.Service.csproj",
+  "projectFilePath": "f:\\asp_solution\\Project.Service\\Project.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\GameDev\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\GameDev\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

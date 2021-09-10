@@ -7,6 +7,8 @@
 
 using Project.Service.Models;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Project.Service.Interfaces
 {
@@ -16,5 +18,7 @@ namespace Project.Service.Interfaces
         Task DeleteModel(int id);
         Task<VehicleMake> ReadMakeById(int id);
         Task<VehicleModel> ReadModelById(int id);
+        IQueryable<VehicleModel> FilterModelByMake(IQueryable<VehicleModel> source, string searchString);
+
     }
 }

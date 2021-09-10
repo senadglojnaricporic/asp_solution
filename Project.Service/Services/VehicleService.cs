@@ -48,6 +48,32 @@ namespace Project.Service.Services
             return new PaginatedList<VehicleMake>(items, count, pageIndex, pageSize);
         }
 
+        public IQueryable<VehicleMake> Sort(IQueryable<VehicleMake> source, string sortOrder)
+        {
+            var _source = source;
+
+            switch(sortOrder)
+            {
+                case "name" :
+                    _source = _source.OrderBy(x => x.Name);
+                    break;
+                case "name_desc" :
+                    _source = _source.OrderByDescending(x => x.Name);
+                    break;
+                case "abrv" :
+                    _source = _source.OrderBy(x => x.Abrv);
+                    break;
+                case "abrv_desc" :
+                    _source = _source.OrderByDescending(x => x.Abrv);
+                    break;
+                default :
+                    _source = _source.OrderBy(x => x.Id);
+                    break;
+            }
+
+            return _source;
+        }
+
         public async Task Create(VehicleModel entity)
         {
             await _DbContext.VehicleModels.AddAsync(entity);
@@ -77,6 +103,50 @@ namespace Project.Service.Services
             var count = await source.CountAsync();
             var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
             return new PaginatedList<VehicleModel>(items, count, pageIndex, pageSize);
+        }
+
+        public IQueryable<VehicleModel> Sort(IQueryable<VehicleModel> source, string sortOrder)
+        {
+            var _source = source;
+
+            switch(sortOrder)
+            {
+                case "name" :
+                    _source = _source.Include(x => x.VehicleMake).OrderBy(x => x.Name);
+                    break;
+                case "name_desc" :
+                    _source = _source.Include(x => x.VehicleMake).OrderByDescending(x => x.Name);
+                    break;
+                case "abrv" :
+                    _source = _source.Include(x => x.VehicleMake).OrderBy(x => x.Abrv);
+                    break;
+                case "abrv_desc" :
+                    _source = _source.Include(x => x.VehicleMake).OrderByDescending(x => x.Abrv);
+                    break;
+                case "make" :
+                    _source = _source.Include(x => x.VehicleMake).OrderBy(x => x.VehicleMake.Name);
+                    break;
+                case "make_desc" :
+                    _source = _source.Include(x => x.VehicleMake).OrderByDescending(x => x.VehicleMake.Name);
+                    break;
+                default :
+                    _source = _source.Include(x => x.VehicleMake).OrderBy(x => x.Id);
+                    break;
+            }
+
+            return _source;
+        }
+
+        public IQueryable<VehicleModel> FilterModelByMake(IQueryable<VehicleModel> source, string searchString)
+        {
+            var _source = source;
+
+            if(string.IsNullOrEmpty(searchString))
+            {
+                _source = _source.Where(x => x.VehicleMake.Name.Contains(searchString));
+            }
+
+            return _source;
         }
     }
 }
