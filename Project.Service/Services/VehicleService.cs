@@ -16,15 +16,9 @@ namespace Project.Service.Services
             _DbContext = DbContext;
         }
 
-        public async Task Create(VehicleMake entity)
+        public async Task Create<T>(T entity) where T : class
         {
-            await _DbContext.Set<VehicleMake>().AddAsync(entity);
-            await _DbContext.SaveChangesAsync();
-        }
-
-        public async Task Create(VehicleModel entity)
-        {
-            await _DbContext.Set<VehicleModel>().AddAsync(entity);
+            await _DbContext.Set<T>().AddAsync(entity);
             await _DbContext.SaveChangesAsync();
         }
 
@@ -33,15 +27,9 @@ namespace Project.Service.Services
             return await _DbContext.Set<T>().FindAsync(id);
         }
 
-        public async Task Update(VehicleMake entity)
+        public async Task Update<T>(T entity) where T : class
         {
-            _DbContext.Set<VehicleMake>().Update(entity);
-            await _DbContext.SaveChangesAsync();
-        }
-
-        public async Task Update(VehicleModel entity)
-        {
-            _DbContext.Set<VehicleModel>().Update(entity);
+            _DbContext.Set<T>().Update(entity);
             await _DbContext.SaveChangesAsync();
         }
 
@@ -52,18 +40,11 @@ namespace Project.Service.Services
             await _DbContext.SaveChangesAsync();
         }
 
-        public async Task<PaginatedList<VehicleMake>> CreatePageAsync(IQueryable<VehicleMake> source, int pageIndex, int pageSize)
+        public async Task<PaginatedList<T>> CreatePageAsync<T>(IQueryable<T> source, int pageIndex, int pageSize) where T : class
         {
             var count = await source.CountAsync();
             var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
-            return new PaginatedList<VehicleMake>(items, count, pageIndex, pageSize);
-        }
-
-        public async Task<PaginatedList<VehicleModel>> CreatePageAsync(IQueryable<VehicleModel> source, int pageIndex, int pageSize)
-        {
-            var count = await source.CountAsync();
-            var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
-            return new PaginatedList<VehicleModel>(items, count, pageIndex, pageSize);
+            return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
 
         public IQueryable<VehicleMake> Sort(IQueryable<VehicleMake> source, string sortOrder)
