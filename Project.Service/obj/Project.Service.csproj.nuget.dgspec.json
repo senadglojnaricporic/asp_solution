@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "f:\\asp_solution\\Project.Service\\Project.Service.csproj": {}
+    "F:\\asp_solution\\Project.Service\\Project.Service.csproj": {}
   },
   "projects": {
-    "f:\\asp_solution\\Project.Service\\Project.Service.csproj": {
+    "F:\\asp_solution\\Project.Service\\Project.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "f:\\asp_solution\\Project.Service\\Project.Service.csproj",
+        "projectUniqueName": "F:\\asp_solution\\Project.Service\\Project.Service.csproj",
         "projectName": "Project.Service",
-        "projectPath": "f:\\asp_solution\\Project.Service\\Project.Service.csproj",
+        "projectPath": "F:\\asp_solution\\Project.Service\\Project.Service.csproj",
         "packagesPath": "C:\\Users\\GameDev\\.nuget\\packages\\",
-        "outputPath": "f:\\asp_solution\\Project.Service\\obj\\",
+        "outputPath": "F:\\asp_solution\\Project.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\GameDev\\AppData\\Roaming\\NuGet\\NuGet.Config"

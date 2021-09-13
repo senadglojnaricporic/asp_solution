@@ -1,4 +1,3 @@
-using Project.Service.Data;
 using Project.Service.Interfaces;
 using Project.Service.Models;
 using System.Threading.Tasks;
@@ -10,34 +9,46 @@ namespace Project.Service.Services
 {
     public class VehicleService : IVehicleService
     {
-        private readonly VehicleDbContext _DbContext;
+        private readonly DbContext _DbContext;
 
-        public VehicleService(VehicleDbContext DbContext)
+        public VehicleService(DbContext DbContext)
         {
-            _DbContext = DbContext;//-----------ninject
+            _DbContext = DbContext;
         }
 
         public async Task Create(VehicleMake entity)
         {
-            await _DbContext.VehicleMakes.AddAsync(entity);
+            await _DbContext.Set<VehicleMake>().AddAsync(entity);
             await _DbContext.SaveChangesAsync();
         }
 
-        public async Task<VehicleMake> ReadMakeById(int id)
+        public async Task Create(VehicleModel entity)
         {
-            return await _DbContext.VehicleMakes.FindAsync(id);
+            await _DbContext.Set<VehicleModel>().AddAsync(entity);
+            await _DbContext.SaveChangesAsync();
+        }
+
+        public async Task<T> ReadById<T>(int id) where T : class
+        {
+            return await _DbContext.Set<T>().FindAsync(id);
         }
 
         public async Task Update(VehicleMake entity)
         {
-            _DbContext.VehicleMakes.Update(entity);
+            _DbContext.Set<VehicleMake>().Update(entity);
             await _DbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteMake(int id)
+        public async Task Update(VehicleModel entity)
         {
-            var entity = await _DbContext.VehicleMakes.FindAsync(id);
-            _DbContext.VehicleMakes.Remove(entity);
+            _DbContext.Set<VehicleModel>().Update(entity);
+            await _DbContext.SaveChangesAsync();
+        }
+
+        public async Task Delete<T>(int id) where T : class
+        {
+            var entity = await _DbContext.Set<T>().FindAsync(id);
+            _DbContext.Set<T>().Remove(entity);
             await _DbContext.SaveChangesAsync();
         }
 
@@ -46,6 +57,13 @@ namespace Project.Service.Services
             var count = await source.CountAsync();
             var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
             return new PaginatedList<VehicleMake>(items, count, pageIndex, pageSize);
+        }
+
+        public async Task<PaginatedList<VehicleModel>> CreatePageAsync(IQueryable<VehicleModel> source, int pageIndex, int pageSize)
+        {
+            var count = await source.CountAsync();
+            var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+            return new PaginatedList<VehicleModel>(items, count, pageIndex, pageSize);
         }
 
         public IQueryable<VehicleMake> Sort(IQueryable<VehicleMake> source, string sortOrder)
@@ -72,37 +90,6 @@ namespace Project.Service.Services
             }
 
             return _source;
-        }
-
-        public async Task Create(VehicleModel entity)
-        {
-            await _DbContext.VehicleModels.AddAsync(entity);
-            await _DbContext.SaveChangesAsync();
-        }
-
-        public async Task<VehicleModel> ReadModelById(int id)
-        {
-            return await _DbContext.VehicleModels.FindAsync(id);
-        }
-
-        public async Task Update(VehicleModel entity)
-        {
-            _DbContext.VehicleModels.Update(entity);
-            await _DbContext.SaveChangesAsync();
-        }
-
-        public async Task DeleteModel(int id)
-        {
-            var entity = await _DbContext.VehicleModels.FindAsync(id);
-            _DbContext.VehicleModels.Remove(entity);
-            await _DbContext.SaveChangesAsync();
-        }
-
-        public async Task<PaginatedList<VehicleModel>> CreatePageAsync(IQueryable<VehicleModel> source, int pageIndex, int pageSize)
-        {
-            var count = await source.CountAsync();
-            var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
-            return new PaginatedList<VehicleModel>(items, count, pageIndex, pageSize);
         }
 
         public IQueryable<VehicleModel> Sort(IQueryable<VehicleModel> source, string sortOrder)

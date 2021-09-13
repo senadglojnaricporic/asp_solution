@@ -38,6 +38,13 @@ F:\asp_solution\Project.MVC\obj\Debug\net5.0\ref\Project.MVC.dll
 F:\asp_solution\Project.MVC\obj\Debug\net5.0\Project.MVC.pdb
 F:\asp_solution\Project.MVC\obj\Debug\net5.0\Project.MVC.genruntimeconfig.cache
 F:\asp_solution\Project.MVC\obj\Debug\net5.0\Project.MVC.csproj.CopyComplete
-F:\asp_solution\Project.MVC\bin\Debug\net5.0\Project.Service.exe
 F:\asp_solution\Project.MVC\bin\Debug\net5.0\Project.Service.dll
 F:\asp_solution\Project.MVC\bin\Debug\net5.0\Project.Service.pdb
+F:\asp_solution\Project.MVC\bin\Debug\net5.0\Humanizer.dll
+F:\asp_solution\Project.MVC\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+F:\asp_solution\Project.MVC\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+F:\asp_solution\Project.MVC\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+F:\asp_solution\Project.MVC\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+F:\asp_solution\Project.MVC\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+F:\asp_solution\Project.MVC\bin\Debug\net5.0\Ninject.dll
+F:\asp_solution\Project.MVC\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
