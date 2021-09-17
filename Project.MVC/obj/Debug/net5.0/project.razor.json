@@ -15624,6 +15624,21 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "f:\\asp_solution\\Project.MVC\\Views\\VehicleMake\\Details.cshtml",
+      "TargetPath": "Views\\VehicleMake\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "f:\\asp_solution\\Project.MVC\\Views\\VehicleModel\\Details.cshtml",
+      "TargetPath": "Views\\VehicleModel\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "f:\\asp_solution\\Project.MVC\\Views\\VehicleMake\\Create.cshtml",
+      "TargetPath": "Views\\VehicleMake\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "f:\\asp_solution\\Project.MVC\\Views\\_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
       "FileKind": "mvc"
@@ -15639,6 +15654,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "f:\\asp_solution\\Project.MVC\\Views\\VehicleModel\\Edit.cshtml",
+      "TargetPath": "Views\\VehicleModel\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "f:\\asp_solution\\Project.MVC\\Views\\VehicleMake\\Delete.cshtml",
+      "TargetPath": "Views\\VehicleMake\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "f:\\asp_solution\\Project.MVC\\Views\\Home\\Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"
@@ -15651,6 +15676,31 @@
     {
       "FilePath": "f:\\asp_solution\\Project.MVC\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "f:\\asp_solution\\Project.MVC\\Views\\VehicleModel\\Delete.cshtml",
+      "TargetPath": "Views\\VehicleModel\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "f:\\asp_solution\\Project.MVC\\Views\\VehicleMake\\Index.cshtml",
+      "TargetPath": "Views\\VehicleMake\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "f:\\asp_solution\\Project.MVC\\Views\\VehicleModel\\Create.cshtml",
+      "TargetPath": "Views\\VehicleModel\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "f:\\asp_solution\\Project.MVC\\Views\\VehicleModel\\Index.cshtml",
+      "TargetPath": "Views\\VehicleModel\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "f:\\asp_solution\\Project.MVC\\Views\\VehicleMake\\Edit.cshtml",
+      "TargetPath": "Views\\VehicleMake\\Edit.cshtml",
       "FileKind": "mvc"
     }
   ],
