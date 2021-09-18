@@ -1,9 +1,9 @@
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace Project.Service.Interfaces
 {
     public interface IGenericVehicleService<TEntity> where TEntity : class
     {
-        IQueryable<TEntity> Sort(IQueryable<TEntity> source, string sortOrder);
+        Task<IPaginatedList<TEntity>> Sort(IPaginatedList<TEntity> source, string sortOrder);
     }
 }

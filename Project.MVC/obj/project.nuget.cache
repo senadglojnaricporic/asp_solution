@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "grZMQrNMkeWVmo5ruxUyFDjm4Y8uzPncANL+l1xIeRdh/zZoRA3Pn55ezKmpP7flCxeJs1wk6c+q/CMJrPinMg==",
+  "dgSpecHash": "eq3gzJT69RjL/ndxyYzw21hca+joWbbFfUwqgwd0d7NiUumoKgnpsnzliP4hrAl5Ihl8wKJI2DGW66EBXTy5Yw==",
   "success": true,
   "projectFilePath": "F:\\asp_solution\\Project.MVC\\Project.MVC.csproj",
   "expectedPackageFiles": [
@@ -58,7 +58,6 @@
     "C:\\Users\\GameDev\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\GameDev\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\GameDev\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
-    "C:\\Users\\GameDev\\.nuget\\packages\\ninject\\3.3.4\\ninject.3.3.4.nupkg.sha512",
     "C:\\Users\\GameDev\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\GameDev\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.4\\sqlitepclraw.bundle_e_sqlite3.2.0.4.nupkg.sha512",
     "C:\\Users\\GameDev\\.nuget\\packages\\sqlitepclraw.core\\2.0.4\\sqlitepclraw.core.2.0.4.nupkg.sha512",

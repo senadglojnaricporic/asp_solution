@@ -5,12 +5,17 @@ namespace Project.MVC.Data
 {
     public class VehicleDbContext : DbContext
     {
-        public VehicleDbContext(DbContextOptions<VehicleDbContext> options)
-            : base(options)
+        public DbSet<VehicleMakeDataModel> VehicleMakes { get; set; }
+        public DbSet<VehicleModelDataModel> VehicleModels { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Test");
         }
 
-        public DbSet<VehicleMake> VehicleMakes { get; set; }
-        public DbSet<VehicleModel> VehicleModels { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            
+        }
     }
 }

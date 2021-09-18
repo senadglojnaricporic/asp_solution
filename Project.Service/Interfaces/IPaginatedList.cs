@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 
 namespace Project.Service.Interfaces
 {
-    public interface IPaginatedList
+    public interface IPaginatedList<TEntity> : IList<TEntity>
     {
         int PageIndex { get; }
         int TotalPages { get; }

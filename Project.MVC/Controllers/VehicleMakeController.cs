@@ -1,20 +1,19 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Project.MVC.Models;
 using Project.Service.Interfaces;
+using Project.MVC.Data;
 
 namespace Project.MVC.Controllers
 {
     public class VehicleMakeController : Controller
     {
-        private readonly IVehicleService _context;
+        private readonly VehicleDbContext _context;
 
-        public VehicleMakeController(IVehicleService context)
+        public VehicleMakeController(VehicleDbContext context)
         {
             _context = context;
         }
@@ -22,7 +21,8 @@ namespace Project.MVC.Controllers
         // GET: VehicleMake
         public async Task<IActionResult> Index()
         {
-            return View(await _context.VehicleMakeViewModel.ToListAsync());
+            
+            return View(await _context.VehicleMakes.ToListAsync());
         }
 
         // GET: VehicleMake/Details/5
@@ -33,7 +33,7 @@ namespace Project.MVC.Controllers
                 return NotFound();
             }
 
-            var vehicleMakeViewModel = await _context.VehicleMakeViewModel
+            var vehicleMakeViewModel = await _context.VehicleMakes
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (vehicleMakeViewModel == null)
             {
@@ -73,7 +73,7 @@ namespace Project.MVC.Controllers
                 return NotFound();
             }
 
-            var vehicleMakeViewModel = await _context.VehicleMakeViewModel.FindAsync(id);
+            var vehicleMakeViewModel = await _context.VehicleMakes.FindAsync(id);
             if (vehicleMakeViewModel == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace Project.MVC.Controllers
                 return NotFound();
             }
 
-            var vehicleMakeViewModel = await _context.VehicleMakeViewModel
+            var vehicleMakeViewModel = await _context.VehicleMakes
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (vehicleMakeViewModel == null)
             {
@@ -139,15 +139,15 @@ namespace Project.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var vehicleMakeViewModel = await _context.VehicleMakeViewModel.FindAsync(id);
-            _context.VehicleMakeViewModel.Remove(vehicleMakeViewModel);
+            var vehicleMakeViewModel = await _context.VehicleMakes.FindAsync(id);
+            _context.VehicleMakes.Remove(vehicleMakeViewModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool VehicleMakeViewModelExists(int id)
         {
-            return _context.VehicleMakeViewModel.Any(e => e.Id == id);
+            return _context.VehicleMakes.Any(e => e.Id == id);
         }
     }
 }

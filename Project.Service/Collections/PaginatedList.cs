@@ -4,7 +4,7 @@ using Project.Service.Interfaces;
 
 namespace Project.Service.Collections
 {
-    public class PaginatedList<TEntity> : List<TEntity>, IPaginatedList
+    public class PaginatedList<TEntity> : List<TEntity>, IPaginatedList<TEntity>
     {
         public int PageIndex { get; private set; }
         public int TotalPages { get; private set; }
