@@ -25,7 +25,7 @@ namespace Project.MVC.Controllers
 
         // GET: VehicleModel
         public async Task<IActionResult> Index(string sortOrder,string currentFilter,
-                                                string searchString, int pageIndex)
+                                                string searchString, int pageIndex = 1)
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParam"] = sortOrder == "name" ? "name_desc" : "name";
@@ -51,7 +51,7 @@ namespace Project.MVC.Controllers
 
             return View(vehicleModelView);
         }
-/*
+
         // GET: VehicleModel/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -60,12 +60,14 @@ namespace Project.MVC.Controllers
                 return NotFound();
             }
 
-            var vehicleModelViewModel = await _context.VehicleModels
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (vehicleModelViewModel == null)
+            var vehicleModelDataModel = await _service.ReadById<VehicleModelDataModel>((int)id);
+
+            if (vehicleModelDataModel == null)
             {
                 return NotFound();
             }
+
+            var vehicleModelViewModel = _mapper.Map<VehicleModelViewModel>(vehicleModelDataModel);
 
             return View(vehicleModelViewModel);
         }
@@ -85,10 +87,11 @@ namespace Project.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(vehicleModelViewModel);
-                await _context.SaveChangesAsync();
+                var vehicleModelDataModel = _mapper.Map<VehicleModelDataModel>(vehicleModelViewModel);
+                await _service.Create<VehicleModelDataModel>(vehicleModelDataModel);
                 return RedirectToAction(nameof(Index));
             }
+
             return View(vehicleModelViewModel);
         }
 
@@ -100,11 +103,15 @@ namespace Project.MVC.Controllers
                 return NotFound();
             }
 
-            var vehicleModelViewModel = await _context.VehicleModels.FindAsync(id);
+            var vehicleModelDataModel = await _service.ReadById<VehicleModelDataModel>((int)id);
+
+            var vehicleModelViewModel = _mapper.Map<VehicleModelViewModel>(vehicleModelDataModel);
+
             if (vehicleModelViewModel == null)
             {
                 return NotFound();
             }
+
             return View(vehicleModelViewModel);
         }
 
@@ -122,14 +129,15 @@ namespace Project.MVC.Controllers
 
             if (ModelState.IsValid)
             {
+                var vehicleModelDataModel = _mapper.Map<VehicleModelDataModel>(vehicleModelViewModel);
+
                 try
                 {
-                    _context.Update(vehicleModelViewModel);
-                    await _context.SaveChangesAsync();
+                    await _service.Update<VehicleModelDataModel>(vehicleModelDataModel);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VehicleModelViewModelExists(vehicleModelViewModel.Id))
+                    if (!VehicleModelViewModelExists(vehicleModelDataModel.Id))
                     {
                         return NotFound();
                     }
@@ -140,6 +148,7 @@ namespace Project.MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             return View(vehicleModelViewModel);
         }
 
@@ -151,12 +160,14 @@ namespace Project.MVC.Controllers
                 return NotFound();
             }
 
-            var vehicleModelViewModel = await _context.VehicleModels
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (vehicleModelViewModel == null)
+            var vehicleModelDataModel = await _service.ReadById<VehicleModelDataModel>((int)id);
+
+            if (vehicleModelDataModel == null)
             {
                 return NotFound();
             }
+
+            var vehicleModelViewModel = _mapper.Map<VehicleModelViewModel>(vehicleModelDataModel);
 
             return View(vehicleModelViewModel);
         }
@@ -166,15 +177,15 @@ namespace Project.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var vehicleModelViewModel = await _context.VehicleModels.FindAsync(id);
-            _context.VehicleModels.Remove(vehicleModelViewModel);
-            await _context.SaveChangesAsync();
+            var vehicleModelDataModel = await _service.ReadById<VehicleModelDataModel>(id);
+            await _service.Delete<VehicleModelDataModel>(id);
+
             return RedirectToAction(nameof(Index));
         }
 
         private bool VehicleModelViewModelExists(int id)
         {
-            return _context.VehicleModels.Any(e => e.Id == id);
+            return _service.GetData<VehicleModelDataModel>().Any(x => x.Id == id);
         }
-*/    }
+    }
 }

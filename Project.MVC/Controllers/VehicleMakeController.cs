@@ -24,7 +24,7 @@ namespace Project.MVC.Controllers
         }
 
         // GET: VehicleMake
-        public async Task<IActionResult> Index(string sortOrder, int pageIndex)
+        public async Task<IActionResult> Index(string sortOrder, int pageIndex = 1)
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParam"] = sortOrder == "name" ? "name_desc" : "name";
