@@ -1,9 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "eq3gzJT69RjL/ndxyYzw21hca+joWbbFfUwqgwd0d7NiUumoKgnpsnzliP4hrAl5Ihl8wKJI2DGW66EBXTy5Yw==",
+  "dgSpecHash": "HR+f5MaOK12R5HCpV7RkBiJetKYUJE57hrCCCWjYTFcwzbIAR0PtUgDj5ZtlW610fMGmbj2+Wd2eTdZaGf3aWA==",
   "success": true,
   "projectFilePath": "F:\\asp_solution\\Project.MVC\\Project.MVC.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\GameDev\\.nuget\\packages\\autofac\\6.2.0\\autofac.6.2.0.nupkg.sha512",
+    "C:\\Users\\GameDev\\.nuget\\packages\\autofac.extensions.dependencyinjection\\7.1.0\\autofac.extensions.dependencyinjection.7.1.0.nupkg.sha512",
+    "C:\\Users\\GameDev\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\GameDev\\.nuget\\packages\\automapper.contrib.autofac.dependencyinjection\\5.4.0\\automapper.contrib.autofac.dependencyinjection.5.4.0.nupkg.sha512",
     "C:\\Users\\GameDev\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\GameDev\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\GameDev\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
@@ -99,7 +103,7 @@
     "C:\\Users\\GameDev\\.nuget\\packages\\system.private.datacontractserialization\\4.3.0\\system.private.datacontractserialization.4.3.0.nupkg.sha512",
     "C:\\Users\\GameDev\\.nuget\\packages\\system.private.uri\\4.3.2\\system.private.uri.4.3.2.nupkg.sha512",
     "C:\\Users\\GameDev\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
-    "C:\\Users\\GameDev\\.nuget\\packages\\system.reflection.emit\\4.3.0\\system.reflection.emit.4.3.0.nupkg.sha512",
+    "C:\\Users\\GameDev\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
     "C:\\Users\\GameDev\\.nuget\\packages\\system.reflection.emit.ilgeneration\\4.3.0\\system.reflection.emit.ilgeneration.4.3.0.nupkg.sha512",
     "C:\\Users\\GameDev\\.nuget\\packages\\system.reflection.emit.lightweight\\4.3.0\\system.reflection.emit.lightweight.4.3.0.nupkg.sha512",
     "C:\\Users\\GameDev\\.nuget\\packages\\system.reflection.extensions\\4.3.0\\system.reflection.extensions.4.3.0.nupkg.sha512",

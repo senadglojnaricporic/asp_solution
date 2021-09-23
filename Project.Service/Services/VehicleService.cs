@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Project.Service.Collections;
+using System.Collections.Generic;
 
 namespace Project.Service.Services
 {
@@ -31,7 +32,7 @@ namespace Project.Service.Services
             _DbContext.Set<T>().Update(entity);
             await _DbContext.SaveChangesAsync();
         }
-
+ 
         public async Task Delete<T>(int id) where T : class
         {
             var entity = await _DbContext.Set<T>().FindAsync(id);
@@ -39,11 +40,17 @@ namespace Project.Service.Services
             await _DbContext.SaveChangesAsync();
         }
 
-        public async Task<IPaginatedList<T>> CreatePageAsync<T>(int pageIndex, int pageSize) where T : class
+        public IQueryable<T> GetData<T>() where T : class
         {
-            var source = _DbContext.Set<T>();
-            var count = await source.CountAsync();
-            var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+            var data = from x in _DbContext.Set<T>() select x;
+            return data;
+        }
+
+        public async Task<IPaginatedList<T>> CreatePageAsync<T>(IQueryable<T> source, int pageIndex, int pageSize) where T : class
+        {
+            var _source = source;
+            var count = await _source.CountAsync();
+            var items = await _source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
     }

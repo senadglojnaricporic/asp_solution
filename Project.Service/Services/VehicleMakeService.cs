@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Project.Service.Collections;
+using System.Collections.Generic;
 
 namespace Project.Service.Services
 {
@@ -16,9 +17,9 @@ namespace Project.Service.Services
             _DbContext = DbContext;
         }
 
-        public async Task<IPaginatedList<VehicleMakeDataModel>> Sort(IPaginatedList<VehicleMakeDataModel> source, string sortOrder)
+        public IQueryable<VehicleMakeDataModel> Sort(IQueryable<VehicleMakeDataModel> source, string sortOrder)
         {
-            var _source = source.AsQueryable();
+            var _source = source;
 
             switch(sortOrder)
             {
@@ -39,9 +40,7 @@ namespace Project.Service.Services
                     break;
             }
 
-            source = (PaginatedList<VehicleMakeDataModel>) await _source.ToListAsync();
-
-            return source;
+            return  _source;
         }
 
     }

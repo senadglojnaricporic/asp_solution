@@ -5,24 +5,37 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.MVC.Models;
 using Project.Service.Interfaces;
+using Project.Service.Models;
 using Project.MVC.Data;
+using AutoMapper;
+using Project.Service.Collections;
 
 namespace Project.MVC.Controllers
 {
     public class VehicleMakeController : Controller
     {
-        private readonly VehicleDbContext _context;
+        private readonly IVehicleMakeService _service;
+        private readonly IMapper _mapper;
 
-        public VehicleMakeController(VehicleDbContext context)
+        public VehicleMakeController(IVehicleMakeService service, IMapper mapper)
         {
-            _context = context;
+            _service = service;
+            _mapper = mapper;
         }
 
         // GET: VehicleMake
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, int pageIndex)
         {
-            
-            return View(await _context.VehicleMakes.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParam"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["AbrvSortParam"] = sortOrder == "abrv" ? "abrv_desc" : "abrv";
+
+            var vehicleMakeData = _service.GetData<VehicleMakeDataModel>();
+            vehicleMakeData = _service.Sort(vehicleMakeData, sortOrder);
+            var list = await _service.CreatePageAsync<VehicleMakeDataModel>(vehicleMakeData, pageIndex, 3);
+            var vehicleMakeView = _mapper.Map<PaginatedList<VehicleMakeViewModel>>(list);
+
+            return View(vehicleMakeView);
         }
 
         // GET: VehicleMake/Details/5
@@ -33,12 +46,14 @@ namespace Project.MVC.Controllers
                 return NotFound();
             }
 
-            var vehicleMakeViewModel = await _context.VehicleMakes
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (vehicleMakeViewModel == null)
+            var vehicleMakeDataModel = await _service.ReadById<VehicleMakeDataModel>((int)id);
+
+            if (vehicleMakeDataModel == null)
             {
                 return NotFound();
             }
+
+            var vehicleMakeViewModel = _mapper.Map<VehicleMakeViewModel>(vehicleMakeDataModel);
 
             return View(vehicleMakeViewModel);
         }
@@ -58,10 +73,11 @@ namespace Project.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(vehicleMakeViewModel);
-                await _context.SaveChangesAsync();
+                var vehicleMakeDataModel = _mapper.Map<VehicleMakeDataModel>(vehicleMakeViewModel);
+                await _service.Create<VehicleMakeDataModel>(vehicleMakeDataModel);
                 return RedirectToAction(nameof(Index));
             }
+
             return View(vehicleMakeViewModel);
         }
 
@@ -73,11 +89,15 @@ namespace Project.MVC.Controllers
                 return NotFound();
             }
 
-            var vehicleMakeViewModel = await _context.VehicleMakes.FindAsync(id);
+            var vehicleMakeDataModel = await _service.ReadById<VehicleMakeDataModel>((int)id);
+
+            var vehicleMakeViewModel = _mapper.Map<VehicleMakeViewModel>(vehicleMakeDataModel);
+
             if (vehicleMakeViewModel == null)
             {
                 return NotFound();
             }
+
             return View(vehicleMakeViewModel);
         }
 
@@ -95,14 +115,15 @@ namespace Project.MVC.Controllers
 
             if (ModelState.IsValid)
             {
+                var vehicleMakeDataModel = _mapper.Map<VehicleMakeDataModel>(vehicleMakeViewModel);
+
                 try
                 {
-                    _context.Update(vehicleMakeViewModel);
-                    await _context.SaveChangesAsync();
+                    await _service.Update<VehicleMakeDataModel>(vehicleMakeDataModel);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VehicleMakeViewModelExists(vehicleMakeViewModel.Id))
+                    if (!VehicleMakeViewModelExists(vehicleMakeDataModel.Id))
                     {
                         return NotFound();
                     }
@@ -113,6 +134,7 @@ namespace Project.MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             return View(vehicleMakeViewModel);
         }
 
@@ -124,12 +146,14 @@ namespace Project.MVC.Controllers
                 return NotFound();
             }
 
-            var vehicleMakeViewModel = await _context.VehicleMakes
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (vehicleMakeViewModel == null)
+            var vehicleMakeDataModel = await _service.ReadById<VehicleMakeDataModel>((int)id);
+
+            if (vehicleMakeDataModel == null)
             {
                 return NotFound();
             }
+
+            var vehicleMakeViewModel = _mapper.Map<VehicleMakeViewModel>(vehicleMakeDataModel);
 
             return View(vehicleMakeViewModel);
         }
@@ -139,15 +163,15 @@ namespace Project.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var vehicleMakeViewModel = await _context.VehicleMakes.FindAsync(id);
-            _context.VehicleMakes.Remove(vehicleMakeViewModel);
-            await _context.SaveChangesAsync();
+            var vehicleMakeDataModel = await _service.ReadById<VehicleMakeDataModel>(id);
+            await _service.Delete<VehicleMakeDataModel>(id);
+
             return RedirectToAction(nameof(Index));
         }
 
         private bool VehicleMakeViewModelExists(int id)
         {
-            return _context.VehicleMakes.Any(e => e.Id == id);
+            return _service.GetData<VehicleMakeDataModel>().Any(x => x.Id == id);
         }
     }
 }

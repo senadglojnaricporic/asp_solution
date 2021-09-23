@@ -6,24 +6,52 @@ using Microsoft.EntityFrameworkCore;
 using Project.MVC.Models;
 using Project.MVC.Data;
 using Project.Service.Interfaces;
+using AutoMapper;
+using Project.Service.Models;
+using Project.Service.Collections;
 
 namespace Project.MVC.Controllers
 {
     public class VehicleModelController : Controller
     {
-        private readonly VehicleDbContext _context;
+        private readonly IVehicleModelService _service;
+        private readonly IMapper _mapper;
 
-        public VehicleModelController(VehicleDbContext context)
+        public VehicleModelController(IVehicleModelService service, IMapper mapper)
         {
-            _context = context;
+            _service = service;
+            _mapper = mapper;
         }
 
         // GET: VehicleModel
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder,string currentFilter,
+                                                string searchString, int pageIndex)
         {
-            return View(await _context.VehicleModels.ToListAsync());
-        }
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParam"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["AbrvSortParam"] = sortOrder == "abrv" ? "abrv_desc" : "abrv";
+            ViewData["MakeSortParam"] = sortOrder == "make" ? "make_desc" : "make";
 
+            if (searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var vehicleModelData = _service.GetData<VehicleModelDataModel>();
+            vehicleModelData = _service.FilterModelByMake(vehicleModelData, searchString);
+            vehicleModelData = _service.Sort(vehicleModelData, sortOrder);
+            var list = await _service.CreatePageAsync<VehicleModelDataModel>(vehicleModelData, pageIndex, 3);
+            var vehicleModelView = _mapper.Map<PaginatedList<VehicleModelViewModel>>(list);
+
+            return View(vehicleModelView);
+        }
+/*
         // GET: VehicleModel/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -148,5 +176,5 @@ namespace Project.MVC.Controllers
         {
             return _context.VehicleModels.Any(e => e.Id == id);
         }
-    }
+*/    }
 }

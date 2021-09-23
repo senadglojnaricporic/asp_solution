@@ -10,7 +10,7 @@ namespace Project.MVC.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Test");
+            optionsBuilder.UseSqlite("Data Source=Vehicle.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

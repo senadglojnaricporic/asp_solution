@@ -10,6 +10,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Project.Service;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Project.MVC.DI;
+using AutoMapper.Contrib.Autofac.DependencyInjection;
 
 namespace Project.MVC
 {
@@ -21,19 +25,28 @@ namespace Project.MVC
         }
 
         public IConfiguration Configuration { get; }
+        public ILifetimeScope AutofacContainer { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+        }
 
-            /*services.AddDbContext<VehicleDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("VehicleDbContext")));*/
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            // Register your own things directly with Autofac here. Don't
+            // call builder.Populate(), that happens in AutofacServiceProviderFactory
+            // for you.
+            builder.RegisterAutoMapper(typeof(Program).Assembly);
+            builder.RegisterModule(new DIModule());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            AutofacContainer = app.ApplicationServices.GetAutofacRoot();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

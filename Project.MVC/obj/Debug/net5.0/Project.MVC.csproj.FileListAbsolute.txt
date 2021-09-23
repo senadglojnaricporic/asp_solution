@@ -46,7 +46,6 @@ F:\asp_solution\Project.MVC\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstr
 F:\asp_solution\Project.MVC\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
 F:\asp_solution\Project.MVC\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
 F:\asp_solution\Project.MVC\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
-F:\asp_solution\Project.MVC\bin\Debug\net5.0\Ninject.dll
 F:\asp_solution\Project.MVC\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
 F:\asp_solution\Project.MVC\bin\Debug\net5.0\Microsoft.AspNetCore.Razor.Language.dll
 F:\asp_solution\Project.MVC\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll
@@ -173,3 +172,12 @@ F:\asp_solution\Project.MVC\obj\Debug\net5.0\Razor\Views\VehicleMake\Delete.csht
 F:\asp_solution\Project.MVC\obj\Debug\net5.0\Razor\Views\VehicleMake\Details.cshtml.g.cs
 F:\asp_solution\Project.MVC\obj\Debug\net5.0\Razor\Views\VehicleMake\Edit.cshtml.g.cs
 F:\asp_solution\Project.MVC\obj\Debug\net5.0\Razor\Views\VehicleMake\Index.cshtml.g.cs
+F:\asp_solution\Project.MVC\obj\Debug\net5.0\Razor\Views\VehicleModel\Create.cshtml.g.cs
+F:\asp_solution\Project.MVC\obj\Debug\net5.0\Razor\Views\VehicleModel\Delete.cshtml.g.cs
+F:\asp_solution\Project.MVC\obj\Debug\net5.0\Razor\Views\VehicleModel\Details.cshtml.g.cs
+F:\asp_solution\Project.MVC\obj\Debug\net5.0\Razor\Views\VehicleModel\Edit.cshtml.g.cs
+F:\asp_solution\Project.MVC\obj\Debug\net5.0\Razor\Views\VehicleModel\Index.cshtml.g.cs
+F:\asp_solution\Project.MVC\bin\Debug\net5.0\Autofac.dll
+F:\asp_solution\Project.MVC\bin\Debug\net5.0\Autofac.Extensions.DependencyInjection.dll
+F:\asp_solution\Project.MVC\bin\Debug\net5.0\AutoMapper.dll
+F:\asp_solution\Project.MVC\bin\Debug\net5.0\AutoMapper.Contrib.Autofac.DependencyInjection.dll

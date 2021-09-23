@@ -1,4 +1,4 @@
-@model IEnumerable<Project.MVC.Models.VehicleMakeViewModel>
+@model Project.Service.Collections.PaginatedList<Project.MVC.Models.VehicleMakeViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,10 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParam"]">Name</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Abrv)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["AbrvSortParam"]">Abrv</a>
             </th>
             <th></th>
         </tr>
@@ -39,3 +39,21 @@
 }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageIndex="@(Model.PageIndex - 1)"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageIndex="@(Model.PageIndex + 1)"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
