@@ -1,8 +1,6 @@
 using AutoMapper;
 using Project.Service.Models;
 using Project.MVC.Models;
-using System.Collections.Generic;
-using Project.Service.Interfaces;
 using Project.Service.Collections;
 
 namespace Project.MVC.Maps
