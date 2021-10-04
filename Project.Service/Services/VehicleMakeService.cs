@@ -4,7 +4,6 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Project.Service.Collections;
-using System.Collections.Generic;
 
 namespace Project.Service.Services
 {
@@ -17,9 +16,14 @@ namespace Project.Service.Services
             _DbContext = DbContext;
         }
 
-        public IQueryable<VehicleMakeDataModel> Sort(IQueryable<VehicleMakeDataModel> source, string sortOrder)
+        public async Task<IPaginatedList<VehicleMakeDataModel>> GetPageAsync(string sortOrder, string searchString, int pageIndex = 1)
         {
-            var _source = source;
+            var _source = from x in _DbContext.Set<VehicleMakeDataModel>() select x;
+
+            if(!string.IsNullOrEmpty(searchString))
+            {
+                _source = _source.Where(x => x.Name.Contains(searchString));
+            }
 
             switch(sortOrder)
             {
@@ -40,8 +44,9 @@ namespace Project.Service.Services
                     break;
             }
 
-            return  _source;
-        }
+            var list = await PaginatedList<VehicleMakeDataModel>.CreatePageAsync(_source, pageIndex, 3);
 
+            return list;
+        }
     }
 }

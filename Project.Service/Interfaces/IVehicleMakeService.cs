@@ -1,4 +1,3 @@
-using System.Linq;
 using Project.Service.Models;
 
 namespace Project.Service.Interfaces

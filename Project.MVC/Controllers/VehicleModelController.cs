@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -41,10 +40,8 @@ namespace Project.MVC.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            var vehicleModelData = _service.GetData<VehicleModelDataModel>();
-            vehicleModelData = _service.FilterModelByMake(vehicleModelData, searchString);
-            vehicleModelData = _service.Sort(vehicleModelData, sortOrder);
-            var list = await _service.CreatePageAsync<VehicleModelDataModel>(vehicleModelData, pageIndex, 3);
+            var list = await _service.GetPageAsync(sortOrder, searchString, pageIndex);
+            
             var vehicleModelView = _mapper.Map<PaginatedList<VehicleModelViewModel>>(list);
 
             return View(vehicleModelView);
@@ -183,7 +180,7 @@ namespace Project.MVC.Controllers
 
         private bool VehicleModelViewModelExists(int id)
         {
-            return _service.GetData<VehicleModelDataModel>().Any(x => x.Id == id);
+            return _service.ReadById<VehicleModelDataModel>(id) != null;
         }
     }
 }

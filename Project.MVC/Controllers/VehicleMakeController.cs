@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,16 +20,27 @@ namespace Project.MVC.Controllers
             _mapper = mapper;
         }
 
-        // GET: VehicleMake
-        public async Task<IActionResult> Index(string sortOrder, int pageIndex = 1)
+        // GET: VehicleMake 
+        public async Task<IActionResult> Index(string sortOrder,string currentFilter,
+                                                string searchString, int pageIndex = 1)
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParam"] = sortOrder == "name" ? "name_desc" : "name";
             ViewData["AbrvSortParam"] = sortOrder == "abrv" ? "abrv_desc" : "abrv";
 
-            var vehicleMakeData = _service.GetData<VehicleMakeDataModel>();
-            vehicleMakeData = _service.Sort(vehicleMakeData, sortOrder);
-            var list = await _service.CreatePageAsync<VehicleMakeDataModel>(vehicleMakeData, pageIndex, 3);
+            if (searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var list = await _service.GetPageAsync(sortOrder, searchString, pageIndex);
+
             var vehicleMakeView = _mapper.Map<PaginatedList<VehicleMakeViewModel>>(list);
 
             return View(vehicleMakeView);
@@ -169,7 +179,7 @@ namespace Project.MVC.Controllers
 
         private bool VehicleMakeViewModelExists(int id)
         {
-            return _service.GetData<VehicleMakeDataModel>().Any(x => x.Id == id);
+            return _service.ReadById<VehicleMakeDataModel>(id) != null;
         }
     }
 }

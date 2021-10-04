@@ -1,9 +1,6 @@
 using Project.Service.Interfaces;
 using System.Threading.Tasks;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Project.Service.Collections;
-using System.Collections.Generic;
 
 namespace Project.Service.Services
 {
@@ -38,20 +35,6 @@ namespace Project.Service.Services
             var entity = await _DbContext.Set<T>().FindAsync(id);
             _DbContext.Set<T>().Remove(entity);
             await _DbContext.SaveChangesAsync();
-        }
-
-        public IQueryable<T> GetData<T>() where T : class
-        {
-            var data = from x in _DbContext.Set<T>() select x;
-            return data;
-        }
-
-        public async Task<IPaginatedList<T>> CreatePageAsync<T>(IQueryable<T> source, int pageIndex, int pageSize) where T : class
-        {
-            var _source = source;
-            var count = await _source.CountAsync();
-            var items = await _source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
-            return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
     }
 }

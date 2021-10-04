@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Project.Service.Interfaces;
 
 namespace Project.Service.Collections
@@ -35,6 +38,14 @@ namespace Project.Service.Collections
             {
                 return (PageIndex < TotalPages);
             }
+        }
+
+        public static async Task<IPaginatedList<TEntity>> CreatePageAsync(IQueryable<TEntity> source, int pageIndex, int pageSize)
+        {
+            var _source = source;
+            var count = await _source.CountAsync();
+            var items = await _source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+            return new PaginatedList<TEntity>(items, count, pageIndex, pageSize);
         }
 
     }
